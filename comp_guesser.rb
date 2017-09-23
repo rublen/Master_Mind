@@ -21,6 +21,7 @@ module MasterMind
         @combs.delete_if { |comb| bulls_and_cows(comb) != 4 } if @@bulls + @@cows == 4
         @combs.delete_if { |comb| bulls_amount(comb) != 0 } if @@bulls == 0
         @combs.delete_if { |comb| cows_amount(comb) != 0 } if @@cows == 0
+        @combs.delete_if { |comb| @guess.any? { |n| comb.count(n) > 1 } } if @@bulls + @@cows == 1
       else
         @combs.delete_if { |comb| bulls_and_cows(comb) != 0 }
       end  

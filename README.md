@@ -7,7 +7,7 @@
 
 Source:  https://github.com/rublen/Master_Mind
 
-Try it without installing:  https://repl.it/Krac/22 (just click 'Run')
+Try it without installing:  https://repl.it/Krac/23 (just click 'Run')
 
 Will be appreciative for any feedback, especially advice and critiques: rublen77@gmail.com, https://github.com/rublen
 

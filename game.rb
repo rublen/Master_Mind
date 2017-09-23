@@ -2,14 +2,19 @@ require_relative "guesser.rb"
 require_relative "comp_guesser.rb"
 
 module MasterMind
-  puts "Do you want battle with computer? (y/n)"
-  answer = gets.strip.downcase
-  until answer == 'y' || answer == 'n'
-    puts "Wrong answer."
-    puts "Do you want to be codemaker? (y/n)"
-    answer = gets.strip.downcase
+
+  def self.check_input(reg_exp)
+    str = gets.strip
+    until reg_exp === str
+      puts "Invalid input. Try again: "
+      str = gets.strip
+    end
+    str
   end
-  
+
+  puts "Do you want battle with computer? (y/n)"
+  answer = check_input(/^[yYnN]{1}$/)
+
   game = Guesser.new
   comp = CompGuesser.new
     
@@ -42,25 +47,17 @@ The task is to guess code of 4 numbers from 6: 1,2,3,4,5,6'
     end
   else
     puts "Do you want to be codemaker? (y/n)"
-    answer = gets.strip.downcase
-    until answer == 'y' || answer == 'n'
-      puts "Wrong answer."
-      puts "Do you want to be codemaker? (y/n)"
-      answer = gets.strip.downcase
-    end
+    answer = check_input(/^[yYnN]{1}$/)
+    
     if answer == 'y'
       puts "Make the code of 4 numbers from 6 (1-6): "
-      code = gets.strip
-      until /^[1-6]{4}$/ === code
-        puts "Invalid input. Try again: "
-        code = gets.strip
-      end
+      code = check_input(/^[1-6]{4}$/)      
       counter = 0
       while game.bulls < 4 && counter < 12
         puts "Computer thinks number is #{comp.guess.join}"
         puts "Compare with your number: #{code}"
         puts "BullsCows: "
-        bc = gets.strip
+        bc = check_input(/^[0-4]{2}$/)
         game.bulls = bc[0].to_i
         game.cows = bc[1].to_i
         comp.combinations

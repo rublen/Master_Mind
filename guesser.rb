@@ -2,7 +2,6 @@ module MasterMind
   COLORES = [ 1, 2, 3, 4, 5, 6 ]
   
   class Guesser
-    # @@guesses = []
     @@bulls = 0
     @@cows = 0
     
@@ -21,12 +20,7 @@ module MasterMind
       
     def guessing
       puts 'Try to guess secret code: '
-      guess=gets.strip
-      until /^[1-6]{4}$/ === guess
-        puts "Invalid input. Try again: "
-        guess = gets.strip
-      end
-      guess
+      guess = MasterMind::check_input(/^[1-6]{4}$/)       
     end
     
     def feedback(str)
